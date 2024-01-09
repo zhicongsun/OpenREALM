@@ -1,0 +1,10 @@
+(cl:defpackage realm_msgs-srv
+  (:use )
+  (:export
+   "PARAMETERCHANGE"
+   "<PARAMETERCHANGE-REQUEST>"
+   "PARAMETERCHANGE-REQUEST"
+   "<PARAMETERCHANGE-RESPONSE>"
+   "PARAMETERCHANGE-RESPONSE"
+  ))
+

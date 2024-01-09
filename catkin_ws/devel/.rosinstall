@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/zeeco/OpenREALM/catkin_ws/devel/setup.sh

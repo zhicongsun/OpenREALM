@@ -1,0 +1,2 @@
+OpenREALM_ROS1_Bridge/realm_msgs:OpenREALM_ROS1_Bridge/realm_ros:OpenREALM_ROS1_Bridge/realm_rviz_plugin:cv_bridge
+-DCMAKE_BUILD_TYPE=Release -DCATKIN_DEVEL_PREFIX=/home/zeeco/OpenREALM/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/zeeco/OpenREALM/catkin_ws/install -G Unix Makefiles

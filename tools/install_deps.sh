@@ -135,7 +135,7 @@ fi
 
 # G2O
 cd ~ && mkdir g2o && cd g2o
-git clone https://github.com/RainerKuemmerle/g2o.git
+git clone git@github.com:RainerKuemmerle/g2o.git
 cd g2o
 git checkout 9b41a4ea5ade8e1250b9c1b279f3a9c098811b5a
 mkdir build && cd build
@@ -153,19 +153,19 @@ cmake \
 make -j4
 sudo make install
 
-# OpenVSLAM
-cd ~ && mkdir openvslam && cd openvslam
-git clone https://github.com/laxnpander/openvslam.git
-cd openvslam
-git submodule init && git submodule update
-mkdir build && cd build
-cmake \
-    -DUSE_PANGOLIN_VIEWER=ON \
-    -DINSTALL_PANGOLIN_VIEWER=ON \
-    -DUSE_SOCKET_PUBLISHER=OFF \
-    -DUSE_STACK_TRACE_LOGGER=ON \
-    -DBUILD_TESTS=ON \
-    -DBUILD_EXAMPLES=ON \
-    ..
-make -j4
-sudo make install
+# # OpenVSLAM
+# cd ~ && mkdir openvslam && cd openvslam
+# git clone https://github.com/laxnpander/openvslam.git
+# cd openvslam
+# git submodule init && git submodule update
+# mkdir build && cd build
+# cmake \
+#     -DUSE_PANGOLIN_VIEWER=ON \
+#     -DINSTALL_PANGOLIN_VIEWER=ON \
+#     -DUSE_SOCKET_PUBLISHER=OFF \
+#     -DUSE_STACK_TRACE_LOGGER=ON \
+#     -DBUILD_TESTS=ON \
+#     -DBUILD_EXAMPLES=ON \
+#     ..
+# make -j4
+# sudo make install
