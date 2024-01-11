@@ -71,13 +71,41 @@ std::string io::getDateTime()
   return std::string(tim);
 }
 
+// uint32_t io::extractFrameIdFromFilepath(const std::string &filepath)
+// {
+//   std::vector<std::string> tokens_path = io::split(filepath.c_str(), '/');
+//   std::vector<std::string> tokens_name = io::split(tokens_path.back().c_str(), '.');
+//   std::string filename = tokens_name[0];
+//   return static_cast<uint32_t>(std::stoul(filename.substr(filename.size()-4,filename.size())));
+// }
 uint32_t io::extractFrameIdFromFilepath(const std::string &filepath)
 {
+  std::cout << "Filepath: " << filepath << std::endl;
+
   std::vector<std::string> tokens_path = io::split(filepath.c_str(), '/');
+  std::cout << "Tokens from path: ";
+  for (const auto &token : tokens_path)
+    std::cout << token << " ";
+  std::cout << std::endl;
+
   std::vector<std::string> tokens_name = io::split(tokens_path.back().c_str(), '.');
+  std::cout << "Tokens from filename: ";
+  for (const auto &token : tokens_name)
+    std::cout << token << " ";
+  std::cout << std::endl;
+
   std::string filename = tokens_name[0];
-  return static_cast<uint32_t>(std::stoul(filename.substr(filename.size()-4,filename.size())));
+  std::cout << "Filename: " << filename << std::endl;
+  //根据文件名img_001.jpg后几位切片给frame id，这里是3位，原数据集是4位
+  std::string last_four_chars = filename.substr(filename.size()-3,filename.size());
+  std::cout << "Last four characters of filename: " << last_four_chars << std::endl;
+
+  uint32_t frame_id = static_cast<uint32_t>(std::stoul(last_four_chars));
+  std::cout << "Frame ID: " << frame_id << std::endl;
+
+  return frame_id;
 }
+
 
 std::vector<std::string> io::split(const char *str, char c)
 {
