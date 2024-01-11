@@ -45,6 +45,72 @@ std::map<std::string, bool> io::Exiv2FrameReader::probeImage(const std::string &
   return tag_existence;
 }
 
+// Frame::Ptr io::Exiv2FrameReader::loadFrameFromExiv2(const std::string &camera_id, const camera::Pinhole::Ptr &cam, const std::string &filepath)
+// {
+//   std::cout << "Opening file: " << filepath << std::endl;
+//   Exiv2ImagePointer exif_img = Exiv2::ImageFactory::open(filepath);
+//   if (exif_img.get())
+//   {
+//     std::cout << "Successfully opened file: " << filepath << std::endl;
+
+//     // Read exif and xmp metadata
+//     exif_img->readMetadata();
+//     Exiv2::ExifData &exif_data = exif_img->exifData();
+//     Exiv2::XmpData &xmp_data = exif_img->xmpData();
+
+//     std::cout << "Successfully read metadata from file: " << filepath << std::endl;
+
+//     // Read image data
+//     cv::Mat img = cv::imread(filepath, cv::IMREAD_COLOR);
+
+//     std::cout << "Successfully read image data from file: " << filepath << std::endl;
+
+//     /*========== ESSENTIAL KEYS ==========*/
+//     uint32_t frame_id = io::extractFrameIdFromFilepath(filepath);
+
+//     std::cout << "Frame ID: " << frame_id << std::endl;
+
+//     std::string camera_id_set;
+//     if (camera_id.empty())
+//     {
+//       if (!readMetaTagCameraId(exif_data, xmp_data, &camera_id_set))
+//         camera_id_set = "unknown_id";
+//     }
+
+//     std::cout << "Camera ID: " << camera_id_set << std::endl;
+
+//     WGSPose wgs{0};
+//     if (!readMetaTagLatitude(exif_data, xmp_data, &wgs.latitude))
+//       wgs.latitude = 0.0;
+
+//     if (!readMetaTagLongitude(exif_data, xmp_data, &wgs.longitude))
+//       wgs.longitude = 0.0;
+
+//     if (!readMetaTagAltitude(exif_data, xmp_data, &wgs.altitude))
+//       wgs.altitude = 0.0;
+
+//     if (!readMetaTagHeading(exif_data, xmp_data, &wgs.heading))
+//       wgs.heading = 0.0;
+
+//     std::cout << "WGS Pose: " << wgs.latitude << ", " << wgs.longitude << ", " << wgs.altitude << ", " << wgs.heading << std::endl;
+
+//     UTMPose utm = gis::convertToUTM(wgs);
+
+//     std::cout << "UTM Pose: " << utm.zone << ", " << utm.band << ", " << utm.easting << ", " << utm.northing << std::endl;
+
+//     /*========== OPTIONAL KEYS ==========*/
+//     uint64_t timestamp_val;
+//     if (!readMetaTagTimestamp(exif_data, xmp_data, &timestamp_val))
+//       timestamp_val = Timer::getCurrentTimeMilliseconds();
+
+//     std::cout << "Timestamp: " << timestamp_val << std::endl;
+
+//     return std::make_shared<Frame>(camera_id, frame_id, timestamp_val, img, utm, cam, computeOrientationFromHeading(utm.heading));
+//   }
+//   std::cerr << "Failed to open file: " << filepath << std::endl;
+//   return nullptr;
+// }
+
 Frame::Ptr io::Exiv2FrameReader::loadFrameFromExiv2(const std::string &camera_id, const camera::Pinhole::Ptr &cam, const std::string &filepath)
 {
   Exiv2ImagePointer exif_img = Exiv2::ImageFactory::open(filepath);
